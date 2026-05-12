@@ -25,3 +25,15 @@ Designed with a soft pink UI and clean modern layout for a smooth user experienc
 - AsyncStorage
 
 ---
+
+🌸 Future Improvements
+
+Planned features for future updates:
+
+✔ Mark tasks as completed
+🗑 Delete tasks
+✏ Edit existing tasks
+🎬 UI animations
+📊 Task statistics
+☁ Cloud synchronization
+🌙 Dark mode
