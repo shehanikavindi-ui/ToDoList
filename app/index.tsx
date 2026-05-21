@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useRef, useState } from "react";
-import { Text, View, StyleSheet, Pressable, ScrollView, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput, ImageBackground } from "react-native";
+import { Text, View, StyleSheet, Pressable, ScrollView, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput, ImageBackground, Alert } from "react-native";
 
 export default function Index() {
 
@@ -28,7 +28,7 @@ export default function Index() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [text, setText] = useState("");
 
-  const saveTask = async (newTasks: Task[])=> {
+  const saveTask = async (newTasks: Task[]) => {
     try {
       await AsyncStorage.setItem("TASKS", JSON.stringify(newTasks));
     } catch (e) {
@@ -36,7 +36,7 @@ export default function Index() {
     }
   };
 
-  const loadTasks = async ()=>{
+  const loadTasks = async () => {
     try {
       const value = await AsyncStorage.getItem("TASKS");
       if (value !== null) {
@@ -44,9 +44,36 @@ export default function Index() {
       } else {
         setTasks([]);
       }
-    } catch (e){
+    } catch (e) {
       console.error(e);
     }
+  };
+
+  const deleteTask = (id: string) => {
+    Alert.alert(
+      "Delete Task",
+      "Are you sure you want to delete this task?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            const updatedTasks = tasks.filter((task) => task.id !== id);
+            setTasks(updatedTasks);
+            saveTask(updatedTasks);
+          },
+        },
+      ]
+    );
+  };
+
+  const toggleTask = (id: string) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+    saveTask(updatedTasks);
   };
 
 
@@ -56,12 +83,21 @@ export default function Index() {
       style={styles.container}>
 
       <ScrollView contentContainerStyle={styles.content}>
-
         {tasks.map((item) => (
-          <View key={item.id} style={styles.bubble}>
-            <Pressable style={styles.tickBox} />
-            <Text style={styles.text}>{item.title}</Text>
-          </View>
+          <Pressable
+            key={item.id}
+            style={styles.bubble}
+            onLongPress={() => deleteTask(item.id)}
+            delayLongPress={400}
+          >
+            <Pressable style={[styles.tickBox, item.completed && styles.tickBoxDone]} onPress={() => toggleTask(item.id)}>
+              {item.completed && <Text style={styles.tick}>✓</Text>}
+            </Pressable>
+
+            <Text style={[styles.text, item.completed && styles.textDone]}>
+              {item.title}
+            </Text>
+          </Pressable>
         ))}
       </ScrollView>
 
@@ -155,6 +191,20 @@ const styles = StyleSheet.create({
     borderColor: "#cfb6c6",
     borderWidth: 1.5,
     borderRadius: 5,
+  },
+  tickBoxDone: {
+    backgroundColor: "#b685a5",
+    borderColor: "#b685a5",
+  },
+  tick: {
+    color: "white",
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  textDone: {
+    textDecorationLine: "line-through",
+    color: "#c0a0b5",
   },
   text: {
     color: "#737373",
