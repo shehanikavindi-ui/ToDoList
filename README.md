@@ -1,3 +1,45 @@
+# 🌸 Pink Notes
+
+A cute and aesthetic notes/task management mobile app built using React Native and Expo ✨  
+Designed with a soft pink UI and clean modern layout for a smooth user experience.
+
+---
+
+## 📱 Features
+
+- ➕ Add new tasks
+- 💾 Persistent local storage using AsyncStorage
+- 🎀 Minimal aesthetic UI
+- 🪟 Modal-based task input system
+- 📜 Scrollable task list
+- ⚡ Real-time task rendering
+- 📱 Built with React Native + Expo
+
+---
+
+## 🛠 Tech Stack
+
+- React Native
+- Expo
+- TypeScript
+- AsyncStorage
+
+---
+
+🌸 Future Improvements
+
+Planned features for future updates:
+
+✔ Mark tasks as completed
+🗑 Delete tasks
+✏ Edit existing tasks
+🎬 UI animations
+📊 Task statistics
+☁ Cloud synchronization
+🌙 Dark mode
+
+==============================================
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
@@ -48,3 +90,4 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
