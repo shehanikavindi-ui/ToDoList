@@ -23,11 +23,8 @@
 
 Planned features for future updates:
 
-✔ Mark tasks as completed
-🗑 Delete tasks
 ✏ Edit existing tasks
 🎬 UI animations
-📊 Task statistics
 ☁ Cloud synchronization
 🌙 Dark mode
 
